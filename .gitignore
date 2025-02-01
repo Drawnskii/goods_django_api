@@ -1,0 +1,57 @@
+# Archivos de Python y compilaciones
+goods_settings/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+
+# Archivos de entorno virtual (venv)
+venv/
+env/
+*.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Configuración de IDEs y editores de código
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Archivos de Django y migraciones innecesarias
+*.log
+*.pot
+*.py[co]
+db.sqlite3
+db.sqlite3-journal
+/media/
+staticfiles/
+static/
+migrations/
+
+# Evitar credenciales y variables de entorno
+.env
+*.secret
+config/settings_local.py  # Si usas configuraciones locales
+
+# Ignorar archivos de bases de datos de PostgreSQL
+*.pgsql
+*.pg_dump
+*.sql
+__db_backup__/
+
+# Archivos generados por Docker
+docker-compose.override.yml
+.dockerignore
+
+# Archivos de caché
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
