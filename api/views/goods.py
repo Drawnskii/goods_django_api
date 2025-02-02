@@ -32,6 +32,16 @@ def get_good(request, pk):
     serializer = GoodsSerializer(good)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def get_good_by_code(request, code):
+    try:
+        good = Goods.objects.get(code=code)  # Busca por el código en lugar de por el pk
+    except Goods.DoesNotExist:
+        return Response({"error": "Good not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = GoodsSerializer(good)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_good(request):

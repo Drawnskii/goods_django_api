@@ -15,6 +15,7 @@ urlpatterns = [
     # Routes for goods management
     path("goods/", goods.create_good, name="create_good"),
     path("goods/<int:pk>/", goods.get_good, name="get_good"),
+    path("goods-by-code/<str:code>/", goods.get_good_by_code, name="get_good_by_code"),
     path("goods/<int:pk>/edit/", goods.update_good, name="update_good"),
     path("goods/<int:pk>/delete/", goods.delete_good, name="delete_good"),
     path('goods/search/', GoodsListCreateAPIView.as_view(), name='goods_list_create'),

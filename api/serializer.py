@@ -25,11 +25,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'first_name', 'last_name']
 
-class UserFirstNameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'first_name']
-
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location

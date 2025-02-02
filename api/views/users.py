@@ -5,14 +5,14 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
-from ..serializer import UserRegistrationSerializer, UserFirstNameSerializer
+from ..serializer import UserRegistrationSerializer, UserSerializer
 
 from django.contrib.auth.models import User
 
 @api_view(['GET'])
 def list_users_first_name(request):
     users = User.objects.all()
-    serializer = UserFirstNameSerializer(users, many=True)
+    serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
