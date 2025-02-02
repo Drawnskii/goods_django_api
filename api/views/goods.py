@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
@@ -11,10 +12,16 @@ from ..filters import GoodsFilter
 
 from django.contrib.auth.models import User
 
+class CustomPageNumberPagination(PageNumberPagination):
+    page_size = 2  # Número de elementos por página
+    page_size_query_param = 'page_size'  # Permitir al usuario cambiar el tamaño de la página con el parámetro 'page_size'
+    max_page_size = 100  # Limitar el tamaño máximo de la página
+
 class GoodsListCreateAPIView(generics.ListCreateAPIView):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     filterset_class = GoodsFilter
+    pagination_class = CustomPageNumberPagination  # Usando la clase personalizada de paginación
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
@@ -70,9 +77,9 @@ def create_good(request):
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
-def update_good(request, pk):
+def update_good(request, code):
     try:
-        good = Goods.objects.get(pk=pk)
+        good = Goods.objects.get(code=code)
     except Goods.DoesNotExist:
         return Response({"error": "Good not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -99,9 +106,9 @@ def update_good(request, pk):
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def delete_good(request, pk):
+def delete_good(request, code):
     try:
-        good = Goods.objects.get(pk=pk)
+        good = Goods.objects.get(code=code)
     except Goods.DoesNotExist:
         return Response({"error": "Good not found"}, status=status.HTTP_404_NOT_FOUND)
 
